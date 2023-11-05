@@ -21,19 +21,19 @@ async function checkWeather(city='london') {
         // api returns an array of selected cities, we only need the first element
         switch(res.weather[0].main) {
             case 'Clouds':
-                weatherIcon.src = '/assets/images/clouds.png'
+                weatherIcon.src = '/docs/assets/images/clouds.png'
                 break;
             case 'Clear':
-                weatherIcon.src = '/assets/images/clear.png'
+                weatherIcon.src = '/docs/assets/images/clear.png'
                 break;
             case 'Rain':
-                weatherIcon.src = '/assets/images/rain.png'
+                weatherIcon.src = '/docs/assets/images/rain.png'
                 break;
             case 'Drizzle':
-                weatherIcon.src = '/assets/images/drizzle.png'
+                weatherIcon.src = '/docs/assets/images/drizzle.png'
                 break;
             case 'Mist':
-                weatherIcon.src = '/assets/images/mist.png'
+                weatherIcon.src = '/docs/assets/images/mist.png'
                 break;
         }
 

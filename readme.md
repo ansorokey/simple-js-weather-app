@@ -12,3 +12,6 @@ This project was created by following [How To Make Weather App Using JavaScript 
 ## How Do I Use This?
 Enter a city and click search to see the current weather at that location.
 Choose between imperial and metric units.
+
+## APIs used
+- [OpenWeatherMap](https://openweathermap.org/current#name)

@@ -107,3 +107,10 @@ body {
     font-size: 14px;
     margin-top: 10px;
 }
+
+.units {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-left: 20px;
+}

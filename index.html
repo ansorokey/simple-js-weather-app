@@ -11,6 +11,17 @@
 
 <body>
     <div class="card">
+        <div class="units">
+            <span>Units:</span>
+            <label id="metric">
+                Metric
+                <input type="radio" value="metric" name="units" for="metric">
+            </label>
+            <label id="imperial">
+                Imperial
+                <input type="radio" value="imperial" name="units" for="imperial" checked="true">
+            </label>
+        </div>
         <div class="search">
             <input
                 type="text"
@@ -49,63 +60,6 @@
         </div>
     </div>
 
-    <script>
-        const apiURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
-        let units = '&units=imperial';
-        const apiKey = '&appid=0e5e280813d9df136cbf020bd12b0446';
-
-        async function checkWeather(city='london') {
-            const response = await fetch(apiURL + city + units + apiKey);
-            if(response.ok) {
-                const res = await response.json();
-
-                console.log(res);
-                // update the values of these fields
-                document.querySelector('.city').innerHTML = res.name;
-                document.querySelector('.temp').innerHTML = Math.round(res.main.temp) + '°f';
-                document.querySelector('.humidity').innerHTML = res.main.humidity + '%';
-                document.querySelector('.wind').innerHTML = res.wind.speed + 'mph';
-
-                const weatherIcon = document.querySelector('.weather-icon');
-                // api returns an array of selected cities
-                // we only need one - the first
-                // use that value to change the image source of the weather icon
-                switch(res.weather[0].main) {
-                    case 'Clouds':
-                        weatherIcon.src = '/assets/images/clouds.png'
-                        break;
-                    case 'Clear':
-                        weatherIcon.src = '/assets/images/clear.png'
-                        break;
-                    case 'Rain':
-                        weatherIcon.src = '/assets/images/rain.png'
-                        break;
-                    case 'Drizzle':
-                        weatherIcon.src = '/assets/images/drizzle.png'
-                        break;
-                    case 'Mist':
-                        weatherIcon.src = '/assets/images/mist.png'
-                        break;
-                }
-
-                // if we get a city back, show the weather, hide the error
-                document.querySelector('.weather').style.display = 'block';
-                document.querySelector('.err').style.display = 'none';
-            } else if(response.status === 404) {
-                // if we don't get a city back, show the error, hide the weather
-                document.querySelector('.err').style.display = 'block';
-                document.querySelector('.weather').style.display = 'none';
-            }
-        }
-
-        // checkWeather();
-
-        let searchBox = document.querySelector('.search input');
-        let searchButton = document.querySelector('.search button');
-        searchButton.addEventListener('click', ()=> {
-            checkWeather(searchBox.value);
-        })
-
-    </script>
+    <script src="/src/index.js" />
 </body>
 </html>

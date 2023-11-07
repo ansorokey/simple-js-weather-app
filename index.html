@@ -64,11 +64,11 @@
     <script>
         const apiURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
         const apiKey = '&appid=0e5e280813d9df136cbf020bd12b0446';
+        // This is so cool!
+        // We can use the query selector and psuedo elements to find the checked radio input for the specified group
+        let units = document.querySelector('input[name=units]:checked').value;
 
         async function checkWeather(city='london') {
-            // This is so cool!
-            // We can use the query selector and psuedo elements to find the checked radio input for the specified group
-            const units = document.querySelector('input[name=units]:checked').value;
 
             const response = await fetch(apiURL + city + '&units=' + units + apiKey);
             if(response.ok) {
@@ -127,13 +127,18 @@
         })
 
         // there are multiple radio button, so use this to get an array of each button
-        // then iterate through all buttons in the group and add an evenmt listener
+        // then iterate through all buttons in the group and add an event listener
         // Only fetches new data if a city has already been recieved
         document.querySelectorAll('input[name=units]').forEach(radio => {
             radio.addEventListener('click', (e) => {
-                console.log('fired');
-                if(document.querySelector('.city').innerText !== '') {
-                    checkWeather(searchBox.value);
+                // Added check so a fetch only occurs when switching units
+                // if the current units matches the radio button, do nothing
+                if(units !== e.target.value) {
+                    // if e clicked a different button, fetch with new units
+                    units = e.target.value
+                    if(document.querySelector('.city').innerText !== '') {
+                        checkWeather(searchBox.value);
+                    }
                 }
             })
         })
